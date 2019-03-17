@@ -1,0 +1,17 @@
+[
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to Ale's Final Viz",
+    "description": "Welcome to our new blog, Ale's Final Viz. We hope you enjoy \nreading what we have to say!",
+    "author": [
+      {
+        "name": "Nora Jones",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2019-03-17",
+    "categories": [],
+    "preview": {},
+    "last_modified": "2019-03-17T15:43:29-07:00"
+  }
+]
