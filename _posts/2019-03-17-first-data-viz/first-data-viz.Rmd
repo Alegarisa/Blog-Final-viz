@@ -1,0 +1,110 @@
+---
+title: "First Data Viz"
+description: |
+  This is the final version of my data visualizations for the Communicating and Transforming Data course.
+author:
+  - name: Alejandra Garcia Isaza
+    url: https://github.com/Alegarisa
+date: 03-17-2019
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(rio)
+library(here)
+library(dplyr)
+library(gghighlight)
+library(patchwork)
+library(gganimate)
+library(ggplot2)
+library(gifski)
+library(colorblindr)
+
+theme_set(theme_minimal(base_size = 15))
+
+```
+
+
+```{r}
+
+d <- import(here("data", "alejandra-sim.csv"), setclass = "tbl_df") 
+
+# editing names
+d <- rename(d, treatment = c("group"), agew1 = c("md1age"), agew8 = c("md8age"), maltxrecs = c("total_number_maltx_records"), placechange = c("pre_b_lplacechanges"), severitymaltx = c("severitymn"), totcupsgain = c("cup_agrto"), totcupsloss = c("cup_alrto"))
+
+```
+
+This is my first attempt. 
+
+```{r}
+
+tidy_d <- d %>%
+  gather(type, count, 10:17)
+
+ggplot(tidy_d, aes(type, count)) +
+  geom_point() 
+
+```
+
+This is my second attempt. 
+
+```{r, fig.height= 8, fig.width=10}
+
+tidy_d <- tidy_d %>%
+  mutate(family = factor(family),
+         type = factor(type),
+         type = fct_recode(type,
+                           "Physical Abuse" = "pabu_sm",
+                            "Sexual Abuse" = "sabu_sm",
+                            "Physical Neglect" = "ftp_sm",
+                            "Supervisory Neglect" = "los_sm",
+                           "Emotional Abuse" = "emtx_sm",
+                            "Social Neglect" = "mle_sm",
+                            "Indirect Parent Behavior" = "ipb_sm",
+                            "Non-codables" = "miss_sm"))
+
+
+
+ggplot(tidy_d, aes(fct_reorder(type, count), count)) +
+  geom_point(aes(color = family), position = "jitter") +
+  labs(title = "Types and Frequency of Maltreatment Experienced by each Girl",
+       subtitle = "Each Girl Represented by a Color",
+       y = "Number of Maltreatment Records",
+       x = "Type of Maltreatment") +
+   guides(color = FALSE) +
+  facet_wrap(~ treatment, ncol = 1) +
+  coord_flip()
+
+# The goal of this plot is to visualize the frequency of each type of maltreatment, but making the point that each girl usually experiences more than one type of maltreatment. 
+
+```
+
+This is my third version.
+
+```{r}
+# trying to use transition from gganimate
+
+tidy_d_no_zero <- tidy_d %>%
+  filter(count >= 1,
+         type != "Non-codables")
+
+ggplot(tidy_d_no_zero, aes(fct_reorder(type, count), count)) +
+  geom_point(aes(color = family), size = 3) +
+  labs(title = "Types and Frequency of Maltreatment Experienced by each Girl",
+       subtitle = "Each Girl Represented by a Color",
+       y = "Number of Maltreatment Events",
+       x = "Type of Maltreatment") +
+  guides(color = FALSE) +
+  coord_flip() +
+  transition_states(family) +
+  enter_fade() +
+  exit_fade() +
+  scale_fill_viridis_c()
+
+```
+

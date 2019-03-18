@@ -1,13 +1,13 @@
 ---
 title: "Welcome to Ale's Final Viz"
 description: |
-  Welcome to our new blog, Ale's Final Viz. We hope you enjoy 
-  reading what we have to say!
+  Welcome to my new blog, Ale's Final Viz. I hope you enjoy my 
+  Data Viz journey!
 author:
-  - name: Nora Jones 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
+  - name: Alejandra Garcia Isaza 
+    url: https://github.com/Alegarisa
+    affiliation: Prevention Science Graduate Programs
+    affiliation_url: https://education.uoregon.edu/prevsci
 date: 03-17-2019
 output:
   distill::distill_article:
@@ -16,9 +16,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-
-# Learn more about creating blogs with Distill at:
-# https://rstudio.github.io/distill/blog.html
 
 ```
 

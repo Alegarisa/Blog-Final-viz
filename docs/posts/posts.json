@@ -1,17 +1,32 @@
 [
   {
-    "path": "posts/welcome/",
-    "title": "Welcome to Ale's Final Viz",
-    "description": "Welcome to our new blog, Ale's Final Viz. We hope you enjoy \nreading what we have to say!",
+    "path": "posts/2019-03-17-first-data-viz/",
+    "title": "First Data Viz",
+    "description": "This is the final version of my data visualizations for the Communicating and Transforming Data course.",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Alejandra Garcia Isaza",
+        "url": "https://github.com/Alegarisa"
+      }
+    ],
+    "date": "2019-03-17",
+    "categories": [],
+    "preview": "posts/2019-03-17-first-data-viz/first-data-viz_files/figure-html5/unnamed-chunk-2-1.png",
+    "last_modified": "2019-03-17T17:44:12-07:00"
+  },
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to Ale's Final Viz",
+    "description": "Welcome to my new blog, Ale's Final Viz. I hope you enjoy my \nData Viz journey!",
+    "author": [
+      {
+        "name": "Alejandra Garcia Isaza",
+        "url": "https://github.com/Alegarisa"
       }
     ],
     "date": "2019-03-17",
     "categories": [],
     "preview": {},
-    "last_modified": "2019-03-17T15:43:29-07:00"
+    "last_modified": "2019-03-17T16:28:58-07:00"
   }
 ]

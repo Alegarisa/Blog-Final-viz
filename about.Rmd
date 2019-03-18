@@ -1,9 +1,14 @@
 ---
-title: "About this blog"
+title: "About this project"
 description: |
-  Some additional details about the blog
+  Maltreatment and Placement Changes as Predictors of the Risky Decision-Making in Adolescent Girls
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+
+The present study used data from the Middle School Success Project, a longitudinal randomized controlled trial that evaluated the efficacy of a version of the KEEP SAFE program for pre-adolescent girls in foster care (Chamberlain, Leve, & Smith, 2006). 
+
+The literature suggests that adverse events that foster youth experience during childhood may uniquely shape youth’s decision-making. In this project I intend to investigate the effects of maltreatment severity and placement changes on adolescent girls' risky decision-making. Understanding this association is important because risky decision-making is associated with a host of negative outcomes for foster youth.  
