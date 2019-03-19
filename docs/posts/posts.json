@@ -17,7 +17,7 @@
   {
     "path": "posts/2019-03-18-third-data-viz/",
     "title": "Third Data Viz",
-    "description": "A short description of the post.",
+    "description": "In this last visualization, I want to provide information about the average of risky choices made by the girls in the sample, differentiating when the risky choices were made in gain trials or loss trials of the CUPS task. Visit the About section for a brief description of the task.",
     "author": [
       {
         "name": "Alejandra Garcia Isaza",
@@ -27,7 +27,7 @@
     "date": "2019-03-18",
     "categories": [],
     "preview": "posts/2019-03-18-third-data-viz/third-data-viz_files/figure-html5/unnamed-chunk-2-1.png",
-    "last_modified": "2019-03-18T16:32:43-07:00"
+    "last_modified": "2019-03-19T13:57:34-07:00"
   },
   {
     "path": "posts/2019-03-17-first-data-viz/",

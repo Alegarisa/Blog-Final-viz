@@ -1,7 +1,7 @@
 ---
 title: "Third Data Viz"
 description: |
-  A short description of the post.
+  In this last visualization, I want to provide information about the average of risky choices made by the girls in the sample, differentiating when the risky choices were made in gain trials or loss trials of the CUPS task. Visit the About section for a brief description of the task. 
 author:
   - name: Alejandra Garcia Isaza
     url: https://github.com/Alegarisa
@@ -39,7 +39,7 @@ d <- rename(d, treatment = c("group"), agew1 = c("md1age"), agew8 = c("md8age"),
 
 ```
 
-First attempt
+In the first version of this visualization, I just tidied the data to get the total number of risky choices made in loss and gain domains in one column, but it didn't work. I realized that I had to take the averages next.  
 
 ```{r, fig.height= 6, fig.width=8}
 
@@ -57,7 +57,7 @@ ggplot(tidy_d2, aes(valence, number)) +
 
 ```
 
-Second attempt
+In the second attempt, I took the averages of the risky choices made in each of the domains, but still. the Y-axis was not showing the average but a count. 
 
 ```{r, fig.height= 6, fig.width=8}
 
@@ -68,9 +68,9 @@ d2 <- d %>%
          `Avoid losses` = mean(totcupsloss, na.rm = TRUE))
 
 d2 <- d2 %>%
-  gather(avg, value, -1:-4)
+  gather(domain, avg, -1:-4)
 
-ggplot(d2, aes(avg, value)) +
+ggplot(d2, aes(domain, avg)) +
   geom_col(fill = "cornflowerblue") + # I don't know why the y-axis goes until 750 if I already calculated the averages.
   facet_wrap(~ treatment) + 
   labs(title = "Average of Risky Choices made to Seek Gains and To avoid Losses by Treatment Condition",
@@ -80,22 +80,22 @@ ggplot(d2, aes(avg, value)) +
 
 ```
 
-Third version
+For the third and final version of this visualization, I decided to abort the mission of doing a dynamite plot, which I finally understood is not very effective and may be deceiving, and went for a dot plot.  In this visualization, you can appreciate the spread of the data points, where clusters of data are, and you can still add the average (the gray dots) and errors bars. I felt happy about the result of this visualization! 
 
 ```{r, fig.height= 6, fig.width=8}
 
 tidy_d2 <- tidy_d2 %>%
   mutate(valence = fct_recode(valence,
-                           "Avoid losses" = "totcupsloss",
-                           "Seek gains" = "totcupsgain"))
+                           "Avoid losses" = "totcupsloss", # TOTAL OF RISKY CHOICES MADE IN LOSS DOMAIN
+                           "Seek gains" = "totcupsgain")) # TOTAL OF RISKY CHOICES MADE IN GAIN DOMAIN
 
 ggplot(tidy_d2, aes(valence, number)) +
-  geom_point(position = position_jitter(0.3), alpha = 0.4, color = "cornflowerblue", size = 2) + 
-  stat_summary(fun.y = mean, geom = "point", color = "gray30") +
+  geom_point(position = position_jitter(0.3), alpha = 0.4, color = "cornflowerblue", size = 3) + 
+  stat_summary(fun.y = mean, geom = "point", color = "gray30", size = 3) +
   stat_summary(fun.data = mean_sdl, geom = "errorbar", width = 0.2, col = "gray60") +
   facet_wrap(~ treatment) + 
   scale_y_continuous("Average of Risky Choices", limits = c(0, 40)) +
-  labs(title = "Average of Risky Choices Made to Seek Gains and to Avoid Losses",
+  labs(title = "Average of Risky Choices Made to Seek Gains/Avoid Losses",
        subtitle = "Decision Making Assessed with CUPS Task",
        x = "") +
   theme(plot.title = element_text(family = "sans", size = 16, face = "bold", hjust = 0), 
@@ -105,4 +105,9 @@ ggplot(tidy_d2, aes(valence, number)) +
         axis.title.y = element_text(family = "sans", size = 12, margin = margin(20, 20, 10, 10)))
 
 ```
+
+
+
+
+
 

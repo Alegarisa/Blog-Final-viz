@@ -11,4 +11,24 @@ knitr::opts_chunk$set(echo = FALSE)
 
 The present study used data from the Middle School Success Project, a longitudinal randomized controlled trial that evaluated the efficacy of a version of the KEEP SAFE program for pre-adolescent girls in foster care (Chamberlain, Leve, & Smith, 2006). 
 
-The literature suggests that adverse events that foster youth experience during childhood may uniquely shape youth’s decision-making. In this project I intend to investigate the effects of maltreatment severity and placement changes on adolescent girls' risky decision-making. Understanding this association is important because risky decision-making is associated with a host of negative outcomes for foster youth.  
+The literature suggests that adverse events that foster youth experience during childhood may uniquely shape youth’s decision-making. In this project, I intend to investigate the effects of maltreatment severity and placement changes on adolescent girls' risky decision-making. Understanding this association is important because risky decision-making is associated with a host of negative outcomes for foster youth.  
+
+This study uses an innovative task to assess risky decision-making called the CUPS task. Briefly, the task resembles a betting game where participants are shown two arrays of cups, with coins underneath them, from which they have to choose between a safe choice and a risky choice in order to win coins (gain domain) or prevent the loss of coins (loss domain). The task consists of a total of 54 trials were 27 trials belong to the gain domain, and 27 trials belong to the loss domain. The number of cups and the amount of money to win/lose varies throughout the trials resulting in different probabilities of winning/losing and different outcome magnitude to win/lose. The safe choice entails a sure but small amount of money that the participant can choose to win/lose in each trial. The risky choice entails the probability of winning all or losing all in each trial. For a more detailed description of the task, see Weller & Fisher (2013). 
+
+
+
+
+
+
+
+
+
+
+
+
+References
+
+Chamberlain, P., Leve, L. D., & Smith, D. K. (2006). Preventing behavior problems and health-risking behaviors in girls in foster care. *International Journal of Behavioral Consultation and Therapy*, 2(4), 518.
+
+Weller, J. A., & Fisher, P. A. (2013). Decision-making deficits among maltreated children. *Child Maltreatment*, 18(3), 184-194.
+
