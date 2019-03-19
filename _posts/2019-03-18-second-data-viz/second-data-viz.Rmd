@@ -1,0 +1,86 @@
+---
+title: "Second Data Viz"
+description: |
+  In this visualization, I want to show the trend between the number of placement changes the girls on the sample have experienced, and the age girls had when they were first removed from their original homes.
+author:
+  - name: Alejandra Garcia Isaza
+    url: https://github.com/Alegarisa
+date: 03-18-2019
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(rio)
+library(here)
+library(dplyr)
+library(gghighlight)
+library(patchwork)
+library(gganimate)
+library(ggplot2)
+library(gifski)
+library(colorblindr)
+
+theme_set(theme_minimal(base_size = 15))
+
+
+```
+
+
+```{r}
+d <- import(here("data", "alejandra-sim.csv"), setclass = "tbl_df") 
+
+# editing names
+d <- rename(d, treatment = c("group"), agew1 = c("md1age"), agew8 = c("md8age"), maltxrecs = c("total_number_maltx_records"), placechange = c("pre_b_lplacechanges"), severitymaltx = c("severitymn"), totcupsgain = c("cup_agrto"), totcupsloss = c("cup_alrto"))
+```
+
+In this first version, I explore the relationship between the variables.
+
+```{r}
+
+ggplot(d, aes(age1removal, placechange)) +
+  geom_point() 
+
+```
+
+Here I wanted to highlight that a high number of placement changes could be experienced by girls who have been in the child welfare system since very young ages and also by girls who entered the system when they were older. However, the highlighting created two separate trends and, I didn't want that. 
+
+```{r}
+
+ggplot(d, aes(age1removal, placechange)) +
+  geom_point(color = "#9516A1") +
+  geom_smooth(method = "lm") +
+  gghighlight(placechange >= 6) +
+  labs(title = "Relationship Between Placement Changes and Age of First Removal",
+       subtitle = "High Number of Placement Changes Highlighted",
+       y = "Number of Placement Changes",
+       x = "Age of Girl when First Removed from Original Home")
+```
+
+In the final version, I flipped-flopped the variables on the axes because I felt the relationship looked more clear this way. I manually changed the number of the placement change variable because for some reason it was including two decimal points even though the variables were integers only. 
+
+In this visualization, you can see that a substantive number of removals happen between ages 0 and 6 and a good number of these girls experience a high number of placement changes. The high number of placement changes in this sample was what picked my interest in this project. I wanted to know if the interaction of maltreatment severity and placement change would affect these girls' risky decision-making. 
+
+```{r, fig.height= 8, fig.width=10}
+
+ggplot(d, aes(placechange, age1removal)) +
+  geom_jitter(size = 4, color = "gray40", alpha = 0.5) +
+  geom_smooth(method = "lm", color = "#6E0D83", alpha = 0.15) +
+  scale_x_discrete(limits = c(0, 3, 6, 9, 12)) +
+  scale_y_continuous() +
+  labs(title = "Placement Changes by Age of First Removal",
+       y = "Girl's Age When \nFirst Removed from Original Home",
+       x = "Placement Changes Experienced") +
+  theme(plot.title = element_text(family = "sans", size = 28, face = "bold", hjust = 0.5, 
+                                  margin = margin(20, 20, 30, 10)), 
+        axis.title.x = element_text(family = "sans", size = 22, margin = margin(20, 20, 10, 20)),
+        axis.title.y = element_text(family = "sans", size = 22, margin = margin(20, 20, 10, 10)),
+        axis.text = element_text(family = "sans", size = 18))
+
+```
+
+

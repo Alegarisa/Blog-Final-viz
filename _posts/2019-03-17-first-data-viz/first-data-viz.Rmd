@@ -1,7 +1,7 @@
 ---
 title: "First Data Viz"
 description: |
-  This is the final version of my data visualizations for the Communicating and Transforming Data course.
+  In this first visualization, I want to convey the message that the experience of maltreatment is complex. Frequently, children experience several types of maltreatment across several years (chronicity). These factors are considered when determining the severity of maltreatment that each child experiences.
 author:
   - name: Alejandra Garcia Isaza
     url: https://github.com/Alegarisa
@@ -39,7 +39,9 @@ d <- rename(d, treatment = c("group"), agew1 = c("md1age"), agew8 = c("md8age"),
 
 ```
 
-This is my first attempt. 
+This is the first version of this visualization. At this point, I had just tidied the data to get a count of the number of incidents within each maltreatment type (e.g., physical abuse, neglect, etc.) that were reported for each girl. I had not changed the names of the variables that corresponded to the maltreatment types. 
+
+At study entry, each girl's DHS file was reviewed, and maltreatment incidents were coded using a modified version of the Maltreatment Classification System (MCS; Barnett, Manly, & Cicchetti, 1993). Given that a substantial number of maltreatment incidents did not fit in the discrete categories of the MCS, a category called Non-codables (at this point called missed_sm) had to be created. The Non-codable incidents are considered maltreatment events.
 
 ```{r}
 
@@ -47,11 +49,11 @@ tidy_d <- d %>%
   gather(type, count, 10:17)
 
 ggplot(tidy_d, aes(type, count)) +
-  geom_point() 
+  geom_point(position = "jitter") 
 
 ```
 
-This is my second attempt. 
+Here I recoded the names of the levels of the variable type (as in the type of maltreatment). In this version, I wanted to make evident that each girl had experienced several types of maltreatment in varying frequencies, thus why I gave a different color to each girl. I knew that that was not going to work given that the sample was 92 girls, but at that point, I didn't know what else to do. Maybe my peer reviewers would suggest me a better way.
 
 ```{r, fig.height= 8, fig.width=10}
 
@@ -80,31 +82,36 @@ ggplot(tidy_d, aes(fct_reorder(type, count), count)) +
   facet_wrap(~ treatment, ncol = 1) +
   coord_flip()
 
-# The goal of this plot is to visualize the frequency of each type of maltreatment, but making the point that each girl usually experiences more than one type of maltreatment. 
-
 ```
 
-This is my third version.
+In the final version of this visualization, I integrated the useful suggestions my peer reviewers gave me (many thanks!), for instance, they helped me realize that I didn't need to differentiate between treatment and control groups and that small change reduced the cognitive load of the viz! 
 
-```{r}
-# trying to use transition from gganimate
+Despite the improvements, I still didn't know how to convey the message I wanted so Daniel suggested me to use ggaminate. I was afraid that it was going to be very hard, but surprisingly it was not. I felt like a pro after integrating the animation! The only thing that I was not able to figure out was how to slow down the transition of each frame. As it is now, it goes too fast. I tried using the transition_length and state_length arguments within the transition_state function, but it didn't work. Suggestions and help are still welcome! 
+
+```{r, fig.height= 15, fig.width=18}
 
 tidy_d_no_zero <- tidy_d %>%
   filter(count >= 1,
          type != "Non-codables")
 
 ggplot(tidy_d_no_zero, aes(fct_reorder(type, count), count)) +
-  geom_point(aes(color = family), size = 3) +
-  labs(title = "Types and Frequency of Maltreatment Experienced by each Girl",
-       subtitle = "Each Girl Represented by a Color",
-       y = "Number of Maltreatment Events",
+  geom_point(aes(color = family), size = 6) +
+  scale_y_continuous("Frequency of Maltreatment", limits = c(0, 15)) +
+  labs(title = "Types* and Frequency of Maltreatment",
+       subtitle = "Each Girl is Represented by a Color",
+       caption = "*Non-codable Maltreatment incidents are not shown",
+       y = "Frequency of Maltreatment",
        x = "Type of Maltreatment") +
   guides(color = FALSE) +
   coord_flip() +
   transition_states(family) +
-  enter_fade() +
-  exit_fade() +
-  scale_fill_viridis_c()
+  scale_fill_viridis_c() +
+  theme(plot.title = element_text(family = "sans", size = 50, face = "bold", hjust = 0.5, margin = margin(20, 20, 10, 10)),
+        plot.subtitle = element_text(family = "sans", size = 42, face = "italic", hjust = 0.5, margin = margin(10, 10, 20, 10)),
+        plot.caption = element_text(family = "sans", size = 24, hjust = 1, margin = margin(25, 10, 10, 10)), 
+        axis.title.x = element_text(family = "sans", size = 38, margin = margin(20, 10, 10, 10)),
+        axis.title.y = element_text(family = "sans", size = 38),
+        axis.text = element_text(family = "sans", size = 24))
 
 ```
 
